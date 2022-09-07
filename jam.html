@@ -1,0 +1,90 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+  
+<head> 
+    <meta charset="UTF-8" /> 
+    <meta name="viewport" content= 
+        "width=device-width,  
+        initial-scale=1.0" /> 
+    <title>Digital Clock</title> 
+    <style> 
+        body { background: black;}
+		.date {
+		    position: relative;
+		    top: 100%;
+		    color: #fff;
+		    font-size: 15px;
+		    font-family: Calibri;
+		    letter-spacing: 2px;
+		}
+        .clock {
+            position: relative;
+            top: 100%;
+            color: #fff;
+            font-size: 32px;
+            font-family: Calibri;
+            letter-spacing: 2px;
+        }
+        
+    </style> 
+</head> 
+  
+<body style="background: #000"> 
+    <div id="MyClockDate" class="date" onload="showDate()"></div>
+    <div id="MyClockTime" class="clock" onload="showTime()"></div>
+  
+    <script> 
+    function showDate(){
+        var dt = new Date();
+        var weekday = new Array(7);
+	       	weekday[0] = "Sun";
+	       	weekday[1] = "Mon";
+	       	weekday[2] = "Tue";
+	       	weekday[3] = "Wed";
+	       	weekday[4] = "Thu";
+	       	weekday[5] = "Fri";
+        	weekday[6] = "Sat";
+	    var day   = weekday[dt.getDay()];
+        var date  = dt.getDate()
+        var month = dt.getMonth()+1;
+        var year  = dt.getFullYear();
+
+        date = (date < 10) ? "0" + date : date;
+        month = (month < 10) ? "0" + month : month;
+
+        var today = day+","+date+"-"+month+"-"+year + "\n\n";
+        document.getElementById("MyClockDate").innerText   = today;
+        document.getElementById("MyClockDate").textContent = today;
+    }
+
+    function showTime(){
+        var dt = new Date();
+        var h  = dt.getHours(); // 0 - 23
+        var m  = dt.getMinutes(); // 0 - 59
+        var s  = dt.getSeconds(); // 0 - 59
+        var session = "AM";
+    
+/*        if(h == 0){
+            h = 12;
+        }
+    
+        if(h > 12){
+            h = h - 12;
+            session = "PM";
+        }
+*/    
+        h = (h < 10) ? "0" + h : h;
+        m = (m < 10) ? "0" + m : m;
+        s = (s < 10) ? "0" + s : s;
+    
+        var time = h + ":" + m + ":" + s + " ";
+        document.getElementById("MyClockTime").innerText   = time;
+        document.getElementById("MyClockTime").textContent = time;
+        setTimeout(showTime, 1000);
+    }
+    showDate();
+    showTime();
+    </script> 
+</body> 
+  
+</html> 
